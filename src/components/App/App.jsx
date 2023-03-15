@@ -1,5 +1,16 @@
+
+import {
+  Button,
+  ImageGallery,
+  ImageGalleryItem,
+  Loader,
+  Modal,
+  Searchbar
+} from 'components'
+
 export const App = () => {
   return (
+    // https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
     <div
       style={{
         height: '100vh',
