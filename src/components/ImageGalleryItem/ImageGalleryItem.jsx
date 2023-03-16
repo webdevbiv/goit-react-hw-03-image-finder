@@ -2,11 +2,11 @@ import React from 'react'
 // import PropTypes from 'prop-types'
 
 export function ImageGalleryItem({ data }) {
-    console.log(data);
+    // console.log(data);
     return (
         <>
-            {data && <li className="gallery-item">
-                <img src={data.previewURL} alt={data.tags} />
+            {data && <li className={'ImageGalleryItem'}>
+                <img className={'ImageGalleryItem-image'} src={data.webformatURL} alt={data.tags} />
             </li>
             }
         </>

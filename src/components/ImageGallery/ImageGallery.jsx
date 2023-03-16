@@ -68,7 +68,7 @@ export class ImageGallery extends Component {
         return (
             <>
                 {searchResults &&
-                    <ul className="gallery">
+                    <ul className={'ImageGallery'}>
                         {searchResults.hits.map(item =>
                         (<ImageGalleryItem
                             data={item}
