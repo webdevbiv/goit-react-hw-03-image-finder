@@ -5,4 +5,5 @@ export * from 'components/ImageGalleryItem/ImageGalleryItem.jsx';
 export * from 'components/Loader/Loader.jsx';
 export * from 'components/Searchbar/Searchbar.jsx';
 export * from 'components/Modal/Modal.jsx';
+export * from 'components/api/api.js'
 

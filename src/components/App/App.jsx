@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 
 import {
   Button,
@@ -5,32 +6,35 @@ import {
   ImageGalleryItem,
   Loader,
   Modal,
-  Searchbar
+  Searchbar,
+  // api
 } from 'components'
 
-export const App = () => {
-  return (
+const INITIAL_STATE = {
+  search: ''
+}
 
-    // https://pixabay.com/api/?q=cat&page=1&key=your_key&image_type=photo&orientation=horizontal&per_page=12
-    <>
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101'
-        }}
-      >
-        React homework template test
-      </div>
-      <ImageGallery />
-      <ImageGalleryItem />
-      <Loader />
-      <Modal />
-      <Searchbar />
-      <Button />
-    </>
-  );
+export class App extends Component {
+  state = { ...INITIAL_STATE }
+
+
+
+  onSubmit = (data) => {
+    this.setState({
+      search: data.search
+    })
+  }
+
+  render() {
+    return (
+      <>
+        <Searchbar onSubmit={this.onSubmit} />
+        <ImageGallery search={this.state.search} />
+        <ImageGalleryItem />
+        <Loader />
+        <Modal />
+        <Button />
+      </>
+    );
+  }
 };
