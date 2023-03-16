@@ -21,6 +21,13 @@ export const App = () => {
         color: '#010101'
       }}
     >
+      <ImageGallery />
+      <ImageGalleryItem />
+      <Loader />
+      <Modal />
+      <Searchbar />
+      <Button />
+
       React homework template test
     </div>
   );
