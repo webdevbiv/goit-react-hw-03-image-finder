@@ -31,42 +31,47 @@ export class ImageGallery extends Component {
             fetch(`${api}?q=${this.props.search}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
                 .then(res => res.json())
                 .catch(error => this.setState({ error }))
-                .then(searchResults => this.setState({ searchResults }))
+                .then(searchResults => {
+                    console.log(searchResults)
+                    this.setState({ searchResults })
+                })
         }
     }
 
     render() {
         const { searchResults, status, error } = this.state
-        console.log(Boolean(searchResults));
-        if (status === 'idle') {
-            return <div>Enter your search</div>
-        }
-        if (status === 'pending') {
-            return <div>Loading...</div>
-        }
-        if (status === 'rejected') {
-            return <div>{error}</div>
-        }
-        if (status === 'resolved') {
-            return (
-                <ul className="gallery">
-                    {searchResults.map(item =>
-                    (<ImageGalleryItem
-                        data={item}
-                        key={item.id} />
-                    ))}
-                </ul>
-            )
-        }
+        console.log(Boolean(searchResults), searchResults);
+        // if (status === 'idle') {
+        //     return <div>Enter your search</div>
+        // }
+        // if (status === 'pending') {
+        //     return <div>Loading...</div>
+        // }
+        // if (status === 'rejected') {
+        //     return <div>{error}</div>
+        // }
+        // if (status === 'resolved') {
+        //     return (
+        //         <ul className="gallery">
+        //             {searchResults.map(item =>
+        //             (<ImageGalleryItem
+        //                 data={item}
+        //                 key={item.id} />
+        //             ))}
+        //         </ul>
+        //     )
+        // }
         return (
             <>
-                <ul className="gallery">
-                    {searchResults.map(item =>
-                    (<ImageGalleryItem
-                        data={item}
-                        key={item.id} />
-                    ))}
-                </ul>
+                {searchResults &&
+                    <ul className="gallery">
+                        {searchResults.hits.map(item =>
+                        (<ImageGalleryItem
+                            data={item}
+                            key={item.id} />
+                        ))}
+                    </ul>
+                }
             </>
         )
     }
