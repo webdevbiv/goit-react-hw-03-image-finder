@@ -39,7 +39,11 @@ export class ImageGallery extends Component {
     }
 
     render() {
-        const { searchResults, status, error } = this.state
+        const {
+            searchResults,
+            // status,
+            // error
+        } = this.state
         console.log(Boolean(searchResults), searchResults);
         // if (status === 'idle') {
         //     return <div>Enter your search</div>
