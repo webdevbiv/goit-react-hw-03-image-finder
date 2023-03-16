@@ -21,6 +21,6 @@ function Searchbar(props) {
     )
 }
 
-Searchbar.propTypes = {}
+// Searchbar.propTypes = {}
 
 export default Searchbar

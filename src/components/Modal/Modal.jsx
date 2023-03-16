@@ -11,6 +11,6 @@ function Modal(props) {
     )
 }
 
-Modal.propTypes = {}
+// Modal.propTypes = {}
 
 export default Modal
