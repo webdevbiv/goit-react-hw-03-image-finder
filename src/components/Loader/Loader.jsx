@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-function Loader(props) {
+export function Loader(props) {
     return (
         <div>Loader</div>
     )
@@ -9,4 +9,4 @@ function Loader(props) {
 
 // Loader.propTypes = {}
 
-export default Loader
+

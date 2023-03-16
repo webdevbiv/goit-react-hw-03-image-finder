@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-function Modal(props) {
+export function Modal(props) {
     return (
         <div class="overlay">
             <div class="modal">
@@ -13,4 +13,4 @@ function Modal(props) {
 
 // Modal.propTypes = {}
 
-export default Modal
+

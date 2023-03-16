@@ -1,7 +1,7 @@
 // import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 
-export default class ImageGallery extends Component {
+export class ImageGallery extends Component {
     // static propTypes = { second: third }
 
     render() {

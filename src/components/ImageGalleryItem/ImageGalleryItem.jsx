@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-function ImageGalleryItem(props) {
+export function ImageGalleryItem(props) {
     return (
         <li class="gallery-item">
             <img src="" alt="" />
@@ -11,4 +11,4 @@ function ImageGalleryItem(props) {
 
 ImageGalleryItem.propTypes = {}
 
-export default ImageGalleryItem
+

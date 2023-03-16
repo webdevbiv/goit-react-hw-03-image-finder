@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-function Button(props) {
+export function Button(props) {
     return (
         <div>Button</div>
     )
@@ -9,4 +9,4 @@ function Button(props) {
 
 // Button.propTypes = {}
 
-export default Button
+

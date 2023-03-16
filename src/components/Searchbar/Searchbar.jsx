@@ -1,7 +1,7 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-function Searchbar(props) {
+export function Searchbar(props) {
     return (
         <header class="searchbar">
             <form class="form">
@@ -23,4 +23,4 @@ function Searchbar(props) {
 
 // Searchbar.propTypes = {}
 
-export default Searchbar
+

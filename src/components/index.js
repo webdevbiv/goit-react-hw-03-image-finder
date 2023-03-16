@@ -1,7 +1,8 @@
-export * from 'components/App/App'
-export * from 'components/Button/Button'
-export * from 'components/ImageGallery/ImageGallery'
-export * from 'components/ImageGalleryItem/ImageGalleryItem'
-export * from 'components/Loader/Loader'
-export * from 'components/Searchbar/Searchbar'
+export * from 'components/App/App.jsx';
+export * from 'components/Button/Button.jsx';
+export * from 'components/ImageGallery/ImageGallery.jsx';
+export * from 'components/ImageGalleryItem/ImageGalleryItem.jsx';
+export * from 'components/Loader/Loader.jsx';
+export * from 'components/Searchbar/Searchbar.jsx';
+export * from 'components/Modal/Modal.jsx';
 
