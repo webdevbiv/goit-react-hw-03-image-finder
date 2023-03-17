@@ -27,7 +27,7 @@ export class ImageGallery extends Component {
                 .catch(error => this.setState({ error }))
                 .then(searchResults => {
                     const hits = searchResults.hits
-                    console.log(hits)
+                    // console.log(hits)
                     this.setState({ searchResults: hits })
                 })
         }
@@ -73,7 +73,7 @@ export class ImageGallery extends Component {
             // status,
             // error
         } = this.state
-        console.log(searchResults);
+        // console.log(searchResults);
         // if (status === 'idle') {
         //     return <div>Enter your search</div>
         // }

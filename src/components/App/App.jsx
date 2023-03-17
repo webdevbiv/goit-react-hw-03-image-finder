@@ -17,7 +17,7 @@ export class App extends Component {
   state = { ...INITIAL_STATE }
 
   onSubmit = (data) => {
-    console.log(data.search.length);
+    // console.log(data.search.length);
     this.setState({
       search: data.search,
       page: 1
