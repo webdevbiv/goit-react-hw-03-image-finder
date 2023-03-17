@@ -16,8 +16,6 @@ const INITIAL_STATE = {
 export class App extends Component {
   state = { ...INITIAL_STATE }
 
-
-
   onSubmit = (data) => {
     console.log(data.search.length);
     this.setState({
@@ -25,6 +23,7 @@ export class App extends Component {
       page: 1
     })
   }
+
   onLoadMore = () => {
     this.setState((prev) => ({
       page: prev.page + 1
