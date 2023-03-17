@@ -48,13 +48,13 @@ export class App extends Component {
   }
 
   handleCloseModal = () => {
-    console.log('click');
     this.setState({
       showModal: false
     })
   }
 
   render() {
+    // console.log(this.state);
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
@@ -67,9 +67,9 @@ export class App extends Component {
         <Loader />
         {this.state.showModal && (
           <Modal
+            closeModal={this.handleCloseModal}
             picture={this.state.modalPictureURL}
             alt={this.state.modalPictureALT}
-            onClick={this.state.handleCloseModal}
           />
         )}
       </>
