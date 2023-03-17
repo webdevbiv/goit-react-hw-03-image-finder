@@ -8,22 +8,40 @@ const INITIAL_STATE = {
     page: 1,
     key: '24773665-69599298287e5482cf3fdda29',
     api: 'https://pixabay.com/api/',
-    error: null
+    error: null,
+    query: ''
 }
 
 export class ImageGallery extends Component {
     // static propTypes = { second: third }
     state = { ...INITIAL_STATE }
+    componentDidMount() {
+        const {
+            api,
+            key,
+            page,
+            searchResults,
+        } = this.state
+        if (searchResults === null) {
+            return fetch(`${api}?&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+                .then(res => res.json())
+                .catch(error => this.setState({ error }))
+                .then(searchResults => {
+                    console.log(searchResults)
+                    this.setState({ searchResults })
+                })
+        }
+    }
 
     componentDidUpdate(prevProps, prevState) {
         const {
             api,
             key,
             page,
-            // status,
             // loading,
             // searchResults
         } = this.state
+
         // const response = api.fetchSearch(this.state)
         // console.log(response.PromiseResult);
         if (prevProps.search !== this.props.search) {
@@ -44,7 +62,6 @@ export class ImageGallery extends Component {
             // status,
             // error
         } = this.state
-        console.log(Boolean(searchResults), searchResults);
         // if (status === 'idle') {
         //     return <div>Enter your search</div>
         // }
@@ -80,3 +97,4 @@ export class ImageGallery extends Component {
         )
     }
 }
+

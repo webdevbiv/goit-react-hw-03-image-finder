@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 
+
 // import PropTypes from 'prop-types'
 
 const INITIAL_STATE = {
@@ -27,8 +28,13 @@ export class Searchbar extends Component {
     render() {
         return (
             <header className={'Searchbar'} >
-                <form id='search' className={'SearchForm'} onSubmit={this.handleSubmit}>
-                    <button type="submit" className={'SearchForm-button'}>
+                <form
+                    id='search'
+                    className={'SearchForm'}
+                    onSubmit={this.handleSubmit}>
+                    <button
+                        type="submit"
+                        className={'SearchForm-button'} >
                         <span className={'SearchForm-button-label'}>Search</span>
                     </button>
                     <input

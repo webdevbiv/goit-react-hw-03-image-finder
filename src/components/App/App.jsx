@@ -20,6 +20,7 @@ export class App extends Component {
 
 
   onSubmit = (data) => {
+    console.log(data.search.length);
     this.setState({
       search: data.search
     })
