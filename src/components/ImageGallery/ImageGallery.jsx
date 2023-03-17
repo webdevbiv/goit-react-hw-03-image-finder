@@ -52,7 +52,7 @@ export class ImageGallery extends Component {
                     this.setState({ searchResults: hits })
                 })
         }
-        if (prevProps.page !== this.props.page) {
+        if (prevProps.page < this.props.page) {
             console.log(this.props.page);
             fetch(`${api}?q=${this.props.search}&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
                 .then(res => res.json())
