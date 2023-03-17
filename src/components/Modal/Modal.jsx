@@ -11,12 +11,10 @@ export class Modal extends Component {
     }
 
     handlePressESC = (e) => {
-        // console.log('object :>> ', Date.now())
         if (e.code === 'Escape') this.props.closeModal()
     }
 
     render() {
-        // console.log(this.props);
         return (
             <div className={'Overlay'} onClick={() => this.props.closeModal()}>
                 <div className={'Modal'} >

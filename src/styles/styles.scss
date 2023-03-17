@@ -129,7 +129,7 @@ img {
   grid-gap: 16px;
 
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 20px;
   padding: 0;
   list-style: none;
   margin-left: auto;
@@ -206,4 +206,11 @@ img {
 .Button:hover,
 .Button:focus {
   background-color: #303f9f;
+}
+
+.Button-section {
+  margin-bottom: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }

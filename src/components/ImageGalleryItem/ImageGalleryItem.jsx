@@ -1,8 +1,8 @@
 import React from 'react'
+
 // import PropTypes from 'prop-types'
 
 export function ImageGalleryItem({ data, onClick }) {
-    // console.log(data);
     return (
         <>
             {data &&
@@ -11,7 +11,6 @@ export function ImageGalleryItem({ data, onClick }) {
                         src={data.webformatURL}
                         alt={data.tags}
                         onClick={() => onClick(data)}
-                        id={data.id}
                     />
                 </li>
             }

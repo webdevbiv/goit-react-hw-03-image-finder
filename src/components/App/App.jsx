@@ -13,7 +13,9 @@ const INITIAL_STATE = {
   page: 1,
   showModal: false,
   modalPictureURL: '',
-  modalPictureALT: ''
+  modalPictureALT: '',
+  modalPictureloaded: true,
+  loader: false
 }
 
 export class App extends Component {
@@ -39,11 +41,23 @@ export class App extends Component {
     }))
   }
 
+  loaderOn = () => {
+    this.setState({
+      loader: true
+    })
+  }
+
+  loaderOff = () => {
+    this.setState({
+      loader: false
+    })
+  }
+
   handleOpenModal = ({ largeImageURL, tags }) => {
     this.setState({
       modalPictureURL: largeImageURL,
       modalPictureALT: tags,
-      showModal: true
+      showModal: true,
     })
   }
 
@@ -59,15 +73,21 @@ export class App extends Component {
       <>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery
+          loader={this.state.loader}
+          loaderOn={this.loaderOn}
+          loaderOff={this.loaderOff}
           search={this.state.search}
           page={this.state.page}
           modal={this.handleOpenModal}
         />
         <Button onClick={this.onLoadMore} />
-        <Loader />
+        {this.state.loader && (
+          <Loader />
+        )}
         {this.state.showModal && (
           <Modal
             closeModal={this.handleCloseModal}
+            modalPictureloaded={this.modalPictureloaded}
             picture={this.state.modalPictureURL}
             alt={this.state.modalPictureALT}
           />

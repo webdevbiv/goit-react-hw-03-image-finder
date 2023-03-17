@@ -1,17 +1,6 @@
-// function fetchSearch(data) {
-//     return fetch(`${data.api}?q=${data.search}&page=${data.page}&key=${data.key}&image_type=photo&orientation=horizontal&per_page=12`)
-//         .then(response => {
-//             if (response.ok) {
-//                 return response.json();
-//             }
-//             return Promise.reject(
-//                 new Error(`No pictures on your search of ${data.search}`)
-//             )
-//         })
-// }
+const BASE_URL = 'https://pixabay.com/api/'
+const API_KEY = '24773665-69599298287e5482cf3fdda29'
 
-
-// export const api = {
-//     fetchSearch,
-// }
-
+export const getPictures = (search, page) => {
+    return fetch(`${BASE_URL}?q=${search}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
+}

@@ -3,7 +3,7 @@ import React from 'react'
 
 export function Button({ onClick }) {
     return (
-        <>
+        <div className={`Button-section`}>
             <button
                 className={'Button'}
                 type="button"
@@ -11,7 +11,7 @@ export function Button({ onClick }) {
             >
                 Load More
             </button>
-        </>
+        </div>
     )
 }
 
