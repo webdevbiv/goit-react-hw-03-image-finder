@@ -9,7 +9,6 @@ const INITIAL_STATE = {
     key: '24773665-69599298287e5482cf3fdda29',
     api: 'https://pixabay.com/api/',
     error: null,
-    query: ''
 }
 
 export class ImageGallery extends Component {
