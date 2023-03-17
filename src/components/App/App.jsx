@@ -14,7 +14,6 @@ const INITIAL_STATE = {
   showModal: false,
   modalPictureURL: '',
   modalPictureALT: '',
-  modalPictureloaded: true,
   loader: false
 }
 
@@ -28,7 +27,6 @@ export class App extends Component {
   }
 
   onSubmit = (data) => {
-    // console.log(data.search.length);
     this.setState({
       search: (data.search).trim().toLowerCase(),
       page: 1
@@ -68,7 +66,6 @@ export class App extends Component {
   }
 
   render() {
-    // console.log(this.state);
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
@@ -87,7 +84,6 @@ export class App extends Component {
         {this.state.showModal && (
           <Modal
             closeModal={this.handleCloseModal}
-            modalPictureloaded={this.modalPictureloaded}
             picture={this.state.modalPictureURL}
             alt={this.state.modalPictureALT}
           />

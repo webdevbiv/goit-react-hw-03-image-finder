@@ -9,7 +9,6 @@ import { nanoid } from 'nanoid'
 
 const INITIAL_STATE = {
     searchResults: null,
-    status: 'idle',
     error: null,
 }
 
