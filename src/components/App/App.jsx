@@ -67,17 +67,19 @@ export class App extends Component {
 
   render() {
     return (
-      <>
+      <div className={`App `}>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery
-          loader={this.state.loader}
-          loaderOn={this.loaderOn}
-          loaderOff={this.loaderOff}
-          search={this.state.search}
-          page={this.state.page}
-          modal={this.handleOpenModal}
-        />
-        <Button onClick={this.onLoadMore} />
+        <div className={`Container `}>
+          <ImageGallery
+            loader={this.state.loader}
+            loaderOn={this.loaderOn}
+            loaderOff={this.loaderOff}
+            search={this.state.search}
+            page={this.state.page}
+            modal={this.handleOpenModal}
+          />
+          <Button onClick={this.onLoadMore} />
+        </div>
         {this.state.loader && (
           <Loader />
         )}
@@ -88,7 +90,7 @@ export class App extends Component {
             alt={this.state.modalPictureALT}
           />
         )}
-      </>
+      </div>
     );
   }
 };
