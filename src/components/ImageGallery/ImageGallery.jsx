@@ -22,7 +22,7 @@ export class ImageGallery extends Component {
             searchResults,
         } = this.state
         if (searchResults === null) {
-            return fetch(`${api}?&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+            return fetch(`${api}?q=&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
                 .then(res => res.json())
                 .catch(error => this.setState({ error }))
                 .then(searchResults => {
