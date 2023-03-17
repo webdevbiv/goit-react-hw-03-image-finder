@@ -2,10 +2,10 @@
 import React, { Component } from 'react'
 import { ImageGalleryItem } from 'components'
 
+
 const INITIAL_STATE = {
     searchResults: null,
     status: 'idle',
-    page: 1,
     key: '24773665-69599298287e5482cf3fdda29',
     api: 'https://pixabay.com/api/',
     error: null,
@@ -14,20 +14,21 @@ const INITIAL_STATE = {
 export class ImageGallery extends Component {
     // static propTypes = { second: third }
     state = { ...INITIAL_STATE }
+
     componentDidMount() {
         const {
             api,
             key,
-            page,
             searchResults,
         } = this.state
         if (searchResults === null) {
-            return fetch(`${api}?&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+            return fetch(`${api}?&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
                 .then(res => res.json())
                 .catch(error => this.setState({ error }))
                 .then(searchResults => {
-                    console.log(searchResults)
-                    this.setState({ searchResults })
+                    const hits = searchResults.hits
+                    console.log(hits)
+                    this.setState({ searchResults: hits })
                 })
         }
     }
@@ -36,21 +37,32 @@ export class ImageGallery extends Component {
         const {
             api,
             key,
-            page,
-            // loading,
-            // searchResults
         } = this.state
 
         // const response = api.fetchSearch(this.state)
         // console.log(response.PromiseResult);
         if (prevProps.search !== this.props.search) {
             console.log(`new prop.search: ${this.props.search}`);
-            fetch(`${api}?q=${this.props.search}&page=${page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+            fetch(`${api}?q=${this.props.search}&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
+                .then(res => res.json())
+                .catch(error => this.setState({ error }))
+                .then(searchResults => {
+                    const hits = searchResults.hits
+                    console.log(searchResults)
+                    this.setState({ searchResults: hits })
+                })
+        }
+        if (prevProps.page !== this.props.page) {
+            console.log(this.props.page);
+            fetch(`${api}?q=${this.props.search}&page=${this.props.page}&key=${key}&image_type=photo&orientation=horizontal&per_page=12`)
                 .then(res => res.json())
                 .catch(error => this.setState({ error }))
                 .then(searchResults => {
                     console.log(searchResults)
-                    this.setState({ searchResults })
+                    const hits = searchResults.hits
+                    this.setState((prev) => ({
+                        searchResults: [...prev.searchResults, ...hits]
+                    }))
                 })
         }
     }
@@ -61,6 +73,7 @@ export class ImageGallery extends Component {
             // status,
             // error
         } = this.state
+        console.log(searchResults);
         // if (status === 'idle') {
         //     return <div>Enter your search</div>
         // }
@@ -85,7 +98,7 @@ export class ImageGallery extends Component {
             <>
                 {searchResults &&
                     <ul className={'ImageGallery'}>
-                        {searchResults.hits.map(item =>
+                        {searchResults.map(item =>
                         (<ImageGalleryItem
                             data={item}
                             key={item.id} />

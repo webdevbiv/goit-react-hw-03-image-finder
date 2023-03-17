@@ -3,15 +3,14 @@ import React, { Component } from 'react'
 import {
   Button,
   ImageGallery,
-  ImageGalleryItem,
   Loader,
   Modal,
   Searchbar,
-  // api
 } from 'components'
 
 const INITIAL_STATE = {
-  search: ''
+  search: '',
+  page: 1
 }
 
 export class App extends Component {
@@ -25,16 +24,24 @@ export class App extends Component {
       search: data.search
     })
   }
+  onLoadMore = () => {
+    this.setState((prev) => ({
+      page: prev.page + 1
+    }))
+  }
 
   render() {
     return (
       <>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery search={this.state.search} />
-        <ImageGalleryItem />
+        <ImageGallery
+          search={this.state.search}
+          page={this.state.page}
+        />
+        <Button onClick={this.onLoadMore} />
         <Loader />
         <Modal />
-        <Button />
+
       </>
     );
   }
