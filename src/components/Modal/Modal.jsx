@@ -1,11 +1,11 @@
 import React from 'react'
 // import PropTypes from 'prop-types'
 
-export function Modal(props) {
+export function Modal({ picture, alt, onClick }) {
     return (
-        <div className="overlay">
-            <div className="modal">
-                <img src="" alt="" />
+        <div className={'Overlay'} >
+            <div className={'Modal'}>
+                <img src={picture} alt={alt} onClick={() => onClick} />
             </div>
         </div>
     )

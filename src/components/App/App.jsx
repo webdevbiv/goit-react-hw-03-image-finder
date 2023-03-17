@@ -10,11 +10,20 @@ import {
 
 const INITIAL_STATE = {
   search: '',
-  page: 1
+  page: 1,
+  showModal: false,
+  modalPictureURL: '',
+  modalPictureALT: ''
 }
 
 export class App extends Component {
   state = { ...INITIAL_STATE }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.id !== this.state.id) {
+
+    }
+  }
 
   onSubmit = (data) => {
     // console.log(data.search.length);
@@ -30,6 +39,21 @@ export class App extends Component {
     }))
   }
 
+  handleOpenModal = ({ largeImageURL, tags }) => {
+    this.setState({
+      modalPictureURL: largeImageURL,
+      modalPictureALT: tags,
+      showModal: true
+    })
+  }
+
+  handleCloseModal = () => {
+    console.log('click');
+    this.setState({
+      showModal: false
+    })
+  }
+
   render() {
     return (
       <>
@@ -37,11 +61,17 @@ export class App extends Component {
         <ImageGallery
           search={this.state.search}
           page={this.state.page}
+          modal={this.handleOpenModal}
         />
         <Button onClick={this.onLoadMore} />
         <Loader />
-        <Modal />
-
+        {this.state.showModal && (
+          <Modal
+            picture={this.state.modalPictureURL}
+            alt={this.state.modalPictureALT}
+            onClick={this.state.handleCloseModal}
+          />
+        )}
       </>
     );
   }

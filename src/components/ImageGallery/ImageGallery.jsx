@@ -94,12 +94,14 @@ export class ImageGallery extends Component {
         //         </ul>
         //     )
         // }
+        const { modal } = this.props;
         return (
             <>
                 {searchResults &&
-                    <ul className={'ImageGallery'}>
+                    <ul className={'ImageGallery'} >
                         {searchResults.map(item =>
                         (<ImageGalleryItem
+                            onClick={modal}
                             data={item}
                             key={item.id} />
                         ))}
