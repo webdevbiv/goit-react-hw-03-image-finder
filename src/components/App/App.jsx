@@ -6,6 +6,7 @@ import {
   Loader,
   Modal,
   Searchbar,
+  getPictures,
 } from 'components'
 
 const INITIAL_STATE = {
@@ -14,15 +15,65 @@ const INITIAL_STATE = {
   showModal: false,
   modalPictureURL: '',
   modalPictureALT: '',
-  loader: false
+  loader: false,
+  searchResults: null,
+  error: null,
 }
 
 export class App extends Component {
+
   state = { ...INITIAL_STATE }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.id !== this.state.id) {
+  componentDidMount() {
+    const {
+      search,
+      page,
+      searchResults,
+    } = this.state
 
+    if (searchResults === null) {
+      this.loaderOn()
+      getPictures(search, page)
+        .then(res => res.json())
+        .catch(error => this.setState({ error }))
+        .then(searchResults => {
+          const hits = searchResults.hits
+          this.setState({ searchResults: hits })
+        })
+        .finally(this.loaderOff())
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      search,
+      page,
+    } = this.state
+
+    if (prevProps.search !== this.props.search) {
+      this.loaderOn()
+      getPictures(search, page)
+        .then(res => res.json())
+        .catch(error => this.setState({ error }))
+        .then(searchResults => {
+          const hits = searchResults.hits
+          console.log(searchResults)
+          this.setState({ searchResults: hits })
+        })
+        .finally(this.loaderOff())
+    }
+    if (prevProps.page < this.props.page) {
+      this.loaderOn()
+      getPictures(search, page)
+        .then(res => res.json())
+        .catch(error => this.setState({ error }))
+        .then(searchResults => {
+          const hits = searchResults.hits
+          this.setState((prev) => ({
+            searchResults: [...prev.searchResults, ...hits]
+          }))
+        })
+        .finally(this.loaderOff())
     }
   }
 
@@ -51,7 +102,7 @@ export class App extends Component {
     })
   }
 
-  handleOpenModal = ({ largeImageURL, tags }) => {
+  modalOpen = ({ largeImageURL, tags }) => {
     this.setState({
       modalPictureURL: largeImageURL,
       modalPictureALT: tags,
@@ -59,35 +110,38 @@ export class App extends Component {
     })
   }
 
-  handleCloseModal = () => {
+  modalClose = () => {
     this.setState({
       showModal: false
     })
   }
 
   render() {
+    const {
+      searchResults,
+      loader,
+      showModal,
+      modalPictureURL,
+      modalPictureALT
+    } = this.state
     return (
       <div className={`App `}>
         <Searchbar onSubmit={this.onSubmit} />
         <div className={`Container `}>
           <ImageGallery
-            loader={this.state.loader}
-            loaderOn={this.loaderOn}
-            loaderOff={this.loaderOff}
-            search={this.state.search}
-            page={this.state.page}
-            modal={this.handleOpenModal}
+            searchResults={searchResults}
+            modalOpen={this.modalOpen}
           />
           <Button onClick={this.onLoadMore} />
         </div>
-        {this.state.loader && (
+        {loader && (
           <Loader />
         )}
-        {this.state.showModal && (
+        {showModal && (
           <Modal
-            closeModal={this.handleCloseModal}
-            picture={this.state.modalPictureURL}
-            alt={this.state.modalPictureALT}
+            closeModal={this.modalClose}
+            picture={modalPictureURL}
+            alt={modalPictureALT}
           />
         )}
       </div>
