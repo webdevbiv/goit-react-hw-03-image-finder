@@ -64,6 +64,7 @@ export class App extends Component {
         })
         .finally(this.loaderOff())
     }
+
     if (prevState.page < page) {
       this.loaderOn()
       getPictures(search, page)
@@ -76,9 +77,7 @@ export class App extends Component {
             searchResults: [...prev.searchResults, ...hits]
           }))
         })
-        .finally(
-          this.loaderOff()
-        )
+        .finally(this.loaderOff())
     }
   }
 
@@ -137,6 +136,7 @@ export class App extends Component {
       modalPictureALT,
       showLoadMore
     } = this.state
+
     return (
       <div className={`App `}>
         <Searchbar onSubmit={this.onSubmit} />
