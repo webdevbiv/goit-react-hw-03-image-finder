@@ -82,7 +82,7 @@ export class App extends Component {
   }
 
   showLoadMore = (length) => {
-    if (length % 12 === 0) {
+    if (length % 12 === 0 && length !== 0) {
       return this.setState({ showLoadMore: true })
     }
     return this.setState({ showLoadMore: false })
