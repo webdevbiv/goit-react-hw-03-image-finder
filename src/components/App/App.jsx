@@ -60,7 +60,6 @@ export class App extends Component {
         .then(searchResults => {
           const hits = searchResults.hits
           this.showLoadMore(hits.length)
-          console.log(searchResults)
           this.setState({ searchResults: hits })
         })
         .finally(this.loaderOff())

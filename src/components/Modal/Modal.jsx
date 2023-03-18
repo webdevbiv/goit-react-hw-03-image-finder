@@ -14,14 +14,26 @@ export class Modal extends Component {
         if (e.code === 'Escape') this.props.closeModal()
     }
 
+    closeModal = (e) => {
+        if (e.target === e.currentTarget) {
+            this.props.closeModal()
+        }
+    }
+
     render() {
         const {
             picture,
             alt
         } = this.props
         return (
-            <div className={'Overlay'} onClick={() => this.props.closeModal()}>
-                <div className={'Modal'} onClick={e => { e.stopPropagation() }}>
+            <div
+                className={'Overlay'}
+                onClick={this.closeModal}
+            >
+                <div
+                    className={'Modal'}
+                // onClick={e => { e.stopPropagation() }}
+                >
                     <img
                         src={picture}
                         alt={alt}
