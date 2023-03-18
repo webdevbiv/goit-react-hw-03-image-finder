@@ -1,6 +1,6 @@
 import React from 'react'
 
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 export function ImageGalleryItem({ data, onClick }) {
     return (
@@ -18,6 +18,9 @@ export function ImageGalleryItem({ data, onClick }) {
     )
 }
 
-// ImageGalleryItem.propTypes = {}
+ImageGalleryItem.propTypes = {
+    data: PropTypes.object.isRequired,
+    onClick: PropTypes.func.isRequired
+}
 
 

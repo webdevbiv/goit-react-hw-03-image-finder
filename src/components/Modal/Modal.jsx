@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 export class Modal extends Component {
+    static propTypes = {
+        closeModal: PropTypes.func.isRequired,
+        picture: PropTypes.string.isRequired,
+        alt: PropTypes.string.isRequired
+    }
+
     componentDidMount() {
         window.addEventListener('keydown', this.handlePressESC)
     }
@@ -32,7 +38,6 @@ export class Modal extends Component {
             >
                 <div
                     className={'Modal'}
-                // onClick={e => { e.stopPropagation() }}
                 >
                     <img
                         src={picture}
@@ -44,6 +49,6 @@ export class Modal extends Component {
     }
 }
 
-// Modal.propTypes = {}
+
 
 

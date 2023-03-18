@@ -1,14 +1,10 @@
 import React from 'react'
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 import { nanoid } from 'nanoid'
 
 import { ImageGalleryItem } from 'components'
 
-export function ImageGallery(props) {
-    const {
-        searchResults,
-        modalOpen
-    } = props
+export function ImageGallery({ searchResults, modalOpen }) {
 
     return (
         <>
@@ -26,6 +22,9 @@ export function ImageGallery(props) {
     )
 }
 
-// ImageGallery.propTypes = {}
+ImageGallery.propTypes = {
+    searchResults: PropTypes.array.isRequired,
+    modalOpen: PropTypes.func.isRequired
+}
 
 

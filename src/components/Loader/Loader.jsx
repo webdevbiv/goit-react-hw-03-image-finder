@@ -1,6 +1,6 @@
 import React from 'react'
 import { Audio } from 'react-loader-spinner'
-// import PropTypes from 'prop-types'
+
 
 export function Loader() {
     return (
@@ -18,6 +18,5 @@ export function Loader() {
     )
 }
 
-// Loader.propTypes = {}
 
 

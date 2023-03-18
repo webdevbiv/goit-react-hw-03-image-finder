@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-
-
-// import PropTypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 const INITIAL_STATE = {
     search: '',
 }
 export class Searchbar extends Component {
-    // static propTypes = { second: third }
+    static propTypes = {
+        onSubmit: PropTypes.func.isRequired
+    }
+
     state = { ...INITIAL_STATE }
 
     handleChange = (e) => {
@@ -52,6 +53,5 @@ export class Searchbar extends Component {
     }
 }
 
-// Searchbar.propTypes = {}
 
 

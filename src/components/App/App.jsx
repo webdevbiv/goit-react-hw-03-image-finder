@@ -17,7 +17,7 @@ const INITIAL_STATE = {
   modalPictureURL: '',
   modalPictureALT: '',
   loader: false,
-  searchResults: null,
+  searchResults: [],
   error: null,
 }
 
@@ -25,48 +25,14 @@ export class App extends Component {
 
   state = { ...INITIAL_STATE }
 
-  componentDidMount() {
-    const {
-      search,
-      page,
-      searchResults,
-    } = this.state
-
-    if (searchResults === null) {
-      this.loaderOn()
-      getPictures(search, page)
-        .then(res => res.json())
-        .catch(error => this.setState({ error }))
-        .then(searchResults => {
-          const hits = searchResults.hits
-          this.showLoadMore(hits.length)
-          this.setState({ searchResults: hits })
-        })
-        .finally(this.loaderOff())
-    }
-  }
-
   componentDidUpdate(_, prevState) {
     const {
       search,
       page,
     } = this.state
 
-    if (prevState.search !== search) {
-      this.loaderOn()
-      getPictures(search, page)
-        .then(res => res.json())
-        .catch(error => this.setState({ error }))
-        .then(searchResults => {
-          const hits = searchResults.hits
-          this.showLoadMore(hits.length)
-          this.setState({ searchResults: hits })
-        })
-        .finally(this.loaderOff())
-    }
-
-    if (prevState.page < page) {
-      this.loaderOn()
+    if (prevState.search !== search || prevState.page !== page) {
+      this.loaderTogle()
       getPictures(search, page)
         .then(res => res.json())
         .catch(error => this.setState({ error }))
@@ -77,7 +43,7 @@ export class App extends Component {
             searchResults: [...prev.searchResults, ...hits]
           }))
         })
-        .finally(this.loaderOff())
+        .finally(this.loaderTogle())
     }
   }
 
@@ -91,7 +57,8 @@ export class App extends Component {
   onSubmit = (data) => {
     this.setState({
       search: (data.search).trim().toLowerCase(),
-      page: 1
+      page: 1,
+      searchResults: [],
     })
   }
 
@@ -101,16 +68,10 @@ export class App extends Component {
     }))
   }
 
-  loaderOn = () => {
-    this.setState({
-      loader: true
-    })
-  }
-
-  loaderOff = () => {
-    this.setState({
-      loader: false
-    })
+  loaderTogle = () => {
+    this.setState(prevState => ({
+      loader: !prevState.loader
+    }))
   }
 
   modalOpen = ({ largeImageURL, tags }) => {
