@@ -15,13 +15,16 @@ export class Modal extends Component {
     }
 
     render() {
+        const {
+            picture,
+            alt
+        } = this.props
         return (
             <div className={'Overlay'} onClick={() => this.props.closeModal()}>
-                <div className={'Modal'} >
+                <div className={'Modal'} onClick={e => { e.stopPropagation() }}>
                     <img
-                        src={this.props.picture}
-                        alt={this.props.alt}
-                        onClick={() => this.props.closeModal()}
+                        src={picture}
+                        alt={alt}
                     />
                 </div>
             </div>

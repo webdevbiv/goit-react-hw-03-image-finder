@@ -12,6 +12,7 @@ import {
 const INITIAL_STATE = {
   search: '',
   page: 1,
+  showLoadMore: false,
   showModal: false,
   modalPictureURL: '',
   modalPictureALT: '',
@@ -38,43 +39,55 @@ export class App extends Component {
         .catch(error => this.setState({ error }))
         .then(searchResults => {
           const hits = searchResults.hits
+          this.showLoadMore(hits.length)
           this.setState({ searchResults: hits })
         })
         .finally(this.loaderOff())
     }
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(_, prevState) {
     const {
       search,
       page,
     } = this.state
 
-    if (prevProps.search !== this.props.search) {
+    if (prevState.search !== search) {
       this.loaderOn()
       getPictures(search, page)
         .then(res => res.json())
         .catch(error => this.setState({ error }))
         .then(searchResults => {
           const hits = searchResults.hits
+          this.showLoadMore(hits.length)
           console.log(searchResults)
           this.setState({ searchResults: hits })
         })
         .finally(this.loaderOff())
     }
-    if (prevProps.page < this.props.page) {
+    if (prevState.page < page) {
       this.loaderOn()
       getPictures(search, page)
         .then(res => res.json())
         .catch(error => this.setState({ error }))
         .then(searchResults => {
           const hits = searchResults.hits
+          this.showLoadMore(hits.length)
           this.setState((prev) => ({
             searchResults: [...prev.searchResults, ...hits]
           }))
         })
-        .finally(this.loaderOff())
+        .finally(
+          this.loaderOff()
+        )
     }
+  }
+
+  showLoadMore = (length) => {
+    if (length % 12 === 0) {
+      return this.setState({ showLoadMore: true })
+    }
+    return this.setState({ showLoadMore: false })
   }
 
   onSubmit = (data) => {
@@ -122,7 +135,8 @@ export class App extends Component {
       loader,
       showModal,
       modalPictureURL,
-      modalPictureALT
+      modalPictureALT,
+      showLoadMore
     } = this.state
     return (
       <div className={`App `}>
@@ -132,7 +146,9 @@ export class App extends Component {
             searchResults={searchResults}
             modalOpen={this.modalOpen}
           />
-          <Button onClick={this.onLoadMore} />
+          {showLoadMore &&
+            <Button onClick={this.onLoadMore} />
+          }
         </div>
         {loader && (
           <Loader />
